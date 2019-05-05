@@ -109,4 +109,34 @@ export const selectLibrary = libraryId => {
 
 10. Copy src/components/common and all it's contents from a previous project and paste them into this project like always :)
 
-11. 
+11. Create src/components/LibarayList.js and do the required imports:
+
+import React, { Component } from "react";
+import { ListView } from "react-native";
+import { connect } from "react-redux";
+import ListItem from "./ListItem";
+
+12. Now implement the components by calling ListItem component to render individual items:
+class LibraryList extends Component {
+  componentWillMount() {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+
+    this.dataSource = ds.cloneWithRows(this.props.libraries);
+  }
+
+  renderRow(library) {
+    return <ListItem library={library} />;
+  }
+
+  render() {
+    return <ListView dataSource={this.dataSource} renderRow={this.renderRow} />;
+  }
+}
+
+const mapStateToProps = state => {
+  return { libraries: state.libraries };
+};
+
+export default connect(mapStateToProps)(LibraryList);
