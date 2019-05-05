@@ -98,3 +98,15 @@ export default (state = null, action) => {
       return state;
   }
 };
+
+9. Now let's define actions create src/actions/index.js and paste the following:
+export const selectLibrary = libraryId => {
+  return {
+    type: "select_library",
+    payload: libraryId
+  };
+};
+
+10. Copy src/components/common and all it's contents from a previous project and paste them into this project like always :)
+
+11. 
